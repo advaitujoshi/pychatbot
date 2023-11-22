@@ -1,19 +1,15 @@
 import random
 
-R_EATING = ("I don't like eating anything beacause I am a bot obviously!")
-
-
+R_EATING = "I don't like anything because I am a bot, obviously!"
 
 def unknown():
-    response = ["Could you please re-phrase that?",
-            "...",
-            "Sounds about right",
-            "What does that mean"] [random.randrange(4)]
-    return response 
-      
-
-
-import random
+    response = random.choice([
+        "Could you please re-phrase that?",
+        "...",
+        "Sounds about right",
+        "What does that mean"
+    ])
+    return response
 
 jokes = [
     "Why don't scientists trust atoms? Because they make up everything!",
@@ -37,8 +33,30 @@ def get_joke():
     return joke
 
 def process_user_input(user_input):
-    if any(keyword in user_input.lower() for keyword in ["one more joke", "another joke", "tell me a joke", "funny joke"]):
+    if any(keyword in user_input.lower() for keyword in ["one more joke", "another joke", "tell me a joke", "funny joke", "funny jokes"]):
         return get_joke()
     else:
-        return "Could you please rephrase that?"
+        return unknown()
 
+songs = [
+    "https://www.youtube.com/watch?v=cmCDqX3ngfA",
+    "https://www.youtube.com/watch?v=VUdeIFQtDYU",
+    "https://www.youtube.com/watch?v=68vZX2uUKKA",
+    "https://www.youtube.com/watch?v=qK5KhQG06xU",
+    "https://www.youtube.com/watch?v=ipii7KbbJLY",
+    "https://www.youtube.com/watch?v=8xG7mH8i-WE"
+]
+
+song_index = 0
+
+def get_song():
+    global song_index
+    song = songs[song_index]
+    song_index = (song_index + 1) % len(songs)
+    return song
+
+def process_user_input(user_input):
+    if any(keyword in user_input.lower() for keyword in ["one more cheerful song", "another cheerful song", "tell me a cheerful song", "cheerful song"]):
+        return get_song()
+    else:
+        return unknown()
